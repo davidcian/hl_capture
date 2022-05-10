@@ -60,14 +60,14 @@ namespace HoloLensCaptureApp
         private static readonly int PhotoVideoImageWidth = 896;
         private static readonly int PhotoVideoImageHeight = 504;
 
-        private static readonly bool IncludeDepth = true;
+        private static readonly bool IncludeDepth = false;
         private static readonly bool IncludeDepthCalibrationMap = false;
-        private static readonly bool IncludeAhat = false;
+        private static readonly bool IncludeAhat = true;
         private static readonly bool IncludeAhatCalibrationMap = false;
         private static readonly bool IncludeInfrared = false;
         private static readonly bool EncodeInfrared = true;
 
-        private static readonly bool IncludeGrayFrontCameras = true;
+        private static readonly bool IncludeGrayFrontCameras = false;
         private static readonly bool IncludeGrayFrontCameraCalibrationMap = false;
         private static readonly bool IncludeGraySideCameras = false;
         private static readonly bool IncludeGraySideCameraCalibrationMap = false;
@@ -77,7 +77,7 @@ namespace HoloLensCaptureApp
 
         private static readonly string CalibrationFolderName = "Calibration";
 
-        private static readonly bool IncludeImu = true;
+        private static readonly bool IncludeImu = false;
 
         private static readonly bool IncludeHead = true;
         private static readonly TimeSpan HeadInterval = TimeSpan.FromMilliseconds(20);
@@ -86,7 +86,7 @@ namespace HoloLensCaptureApp
         private static readonly bool IncludeHands = true;
         private static readonly TimeSpan HandsInterval = TimeSpan.FromMilliseconds(20);
 
-        private static readonly bool IncludeAudio = true;
+        private static readonly bool IncludeAudio = false;
 
         private static readonly bool IncludeSceneUnderstanding = true;
         private static readonly TimeSpan SceneUnderstandingInterval = TimeSpan.FromSeconds(60);
@@ -501,17 +501,17 @@ namespace HoloLensCaptureApp
 
                                 if (IncludeHead)
                                 {
-                                    Write("Head", head?.Out, port++, Serializers.CoordinateSystemFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("Head", head?.Out, port++, Serializers.CoordinateSystemFormat(), DeliveryPolicy.Unlimited);
                                 }
 
                                 if (IncludeEyes)
                                 {
-                                    Write("Eyes", eyes?.Out, port++, Serializers.Ray3DFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("Eyes", eyes?.Out, port++, Serializers.Ray3DFormat(), DeliveryPolicy.Unlimited);
                                 }
 
                                 if (IncludeHands)
                                 {
-                                    Write("Hands", hands?.Out, port++, Serializers.HandsFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("Hands", hands?.Out, port++, Serializers.HandsFormat(), DeliveryPolicy.Unlimited);
                                 }
 
                                 if (IncludeAudio)
@@ -532,7 +532,7 @@ namespace HoloLensCaptureApp
                                 if (IncludeDepth)
                                 {
                                     var depthImageCameraView = depthCamera.DepthImageCameraView;
-                                    Write("DepthImageCameraView", depthImageCameraView, port++, Serializers.DepthImageCameraViewFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("DepthImageCameraView", depthImageCameraView, port++, Serializers.DepthImageCameraViewFormat(), DeliveryPolicy.Unlimited);
 
                                     if (IncludeDepthCalibrationMap)
                                     {
@@ -562,7 +562,7 @@ namespace HoloLensCaptureApp
                                 {
                                     var ahatDepthImageCameraView = depthAhatCamera.DepthImageCameraView;
 
-                                    Write("AhatDepthImageCameraView", ahatDepthImageCameraView, port++, Serializers.DepthImageCameraViewFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("AhatDepthImageCameraView", ahatDepthImageCameraView, port++, Serializers.DepthImageCameraViewFormat(), DeliveryPolicy.Unlimited);
 
                                     if (IncludeAhatCalibrationMap)
                                     {
