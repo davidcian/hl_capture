@@ -110,7 +110,7 @@ namespace HoloLensCaptureApp
 
         private static readonly Vec2 LabelSize = new Vec2(FrameWidth - FrameLabelInset * 2f, 0.008f);
 
-        private static string captureServerAddress = "0.0.0.0";
+        private static string captureServerAddress = "128.179.199.170";
 
         private enum State
         {
@@ -521,7 +521,7 @@ namespace HoloLensCaptureApp
 
                                 if (IncludeVideo)
                                 {
-                                    Write("VideoEncodedImageCameraView", camera.VideoEncodedImageCameraView, port++, Serializers.EncodedImageCameraViewFormat(), DeliveryPolicy.LatestMessage);
+                                    Write("VideoEncodedImageCameraView", camera.VideoEncodedImageCameraView, port++, Serializers.EncodedImageCameraViewFormat(), DeliveryPolicy.Unlimited);
                                 }
 
                                 if (IncludePreview)
@@ -834,7 +834,9 @@ namespace HoloLensCaptureApp
             try
             {
                 var config = await folder.GetFileAsync(configFile);
-                captureServerAddress = await FileIO.ReadTextAsync(config);
+
+                // captureServerAddress = await FileIO.ReadTextAsync(config);
+                captureServerAddress = "128.179.199.170";
             }
             catch (FileNotFoundException)
             {
